@@ -14,6 +14,9 @@ export {
   default as SideNav,
 } from './SideNav';
 export {
+  default as Stopwatch,
+} from './Stopwatch';
+export {
   default as StickyNav,
 } from './StickyNav';
 export {

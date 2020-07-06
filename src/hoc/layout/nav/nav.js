@@ -10,9 +10,10 @@ const Navbar = styled.nav`
   height: ${({ theme }) => theme.height.navbar.xs};
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${({ theme }) => theme.palette.primary[0]};
+  background-color: ${({ theme }) => `rgba(${theme.palette.primary[0]}, .1)`};
   padding: 0 2rem;
-  position: relative;
+  position: fixed;
+  top: 0;
   z-index: 9999;
 
   @media ${device.md} {
@@ -26,15 +27,13 @@ const Navbar = styled.nav`
 
 const NavCollapse = styled(CollapseButton)`
   padding: 1rem .75rem;
-  border: 1px solid ${({ theme }) => theme.palette.white};
-  background-color: ${({ theme }) => theme.palette.active};
 
   > div {
-    width: 3.6rem;
+    width: 3.2rem;
     border-bottom: .3rem solid ${({ theme }) => theme.palette.white};
 
     &:not(:first-child) {
-      margin-top: 1rem;
+      margin-top: .8rem;
     }
   }
 
@@ -71,7 +70,7 @@ class Nav extends Component {
         <Navbar id="navbar">
           <NavCollapse className="nav-collapse" clicked={this.collapseHandler} />
           <NavLogo />
-          {pcLinks}
+          {/* {pcLinks} */}
         </Navbar>
       </>
     );

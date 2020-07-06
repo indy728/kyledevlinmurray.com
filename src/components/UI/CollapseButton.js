@@ -4,31 +4,17 @@ import PropTypes from 'prop-types';
 import { device } from 'themes/media';
 
 const Wrapper = styled.div`
-  border-radius: 3px;
+  border-radius: 50%;
   justify-content: space-between;
-  padding: .2rem;
-
-  @media ${device.sm} {}
-
-  @media ${device.md} {}
-
-  @media ${device.lg} {}
-
-  @media ${device.xl} {}
+  padding: .1rem;
 `;
 
 const Line = styled.div`
   width: 100%;
-  border-bottom: .3rem solid ${({ theme }) => theme.palette.primary};
 
-  @media ${device.sm} {
+  &:first-child, &:last-child {
+    width: 80%;
   }
-
-  @media ${device.md} {}
-
-  @media ${device.lg} {}
-
-  @media ${device.xl} {}
 `;
 
 const collapseButton = (props) => {

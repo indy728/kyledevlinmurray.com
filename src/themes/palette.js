@@ -27,8 +27,15 @@ const overlay = {
 };
 
 export const homepage = {
-  primary: ['#022B58', '#02356B', '#034185', '#034891', '#0467D1'],
-  complement: ['#D18800', '#915E00', '#855600', '#6B4600', '#382400'],
+  primary: ['#011919', '#023232', '#034b4b', '#046464', '#08c8c8'], // rgb(1, 25, 25)
+  complement: ['#7D0764', '#C934AA'],
+  analog: {
+    coolest: '#034b4b',
+    cool: '#2FE079',
+    neutral: '#52C934',
+    warm: '#D2E02F',
+    warmest: '#D6B72D',
+  },
   accent: ['#014544', '#016B69', '#018582', '#01918F', '#02D1CE'],
   active: '#02356B',
   font: homeBase,
