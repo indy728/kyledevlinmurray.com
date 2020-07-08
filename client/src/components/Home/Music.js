@@ -38,6 +38,7 @@ const PlayerWrapper = styled.div`
     padding: 2rem;
     overflow: hidden;
     align-items: flex-start;
+    background-color: ${({ theme }) => theme.palette.complement[0]};
   }
 `;
 

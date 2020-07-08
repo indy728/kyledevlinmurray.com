@@ -13,11 +13,5 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
 }));
 
-app.use(express.static('public'));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-});
-
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Running a GraphQL API server at localhost:${port}/graphql`));

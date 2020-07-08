@@ -39,7 +39,7 @@
     "old-start": "npm-run-all --parallel watch:server launch-app",
     "watch:server": "nodemon --watch server server",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && mv build ../public",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

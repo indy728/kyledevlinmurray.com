@@ -13,28 +13,13 @@ const Wrapper = styled.div`
 
   @media ${device.sm} {
     align-items: flex-start;
-
   }
-
-  @media ${device.md} {
-  }
-
-  @media ${device.lg} {}
-
-  @media ${device.xl} {}
 `;
 
 const LinkList = styled.ul`
   @media ${device.sm} {
     align-items: flex-start;
   }
-
-  @media ${device.md} {
-  }
-
-  @media ${device.lg} {}
-
-  @media ${device.xl} {}
 `;
 
 const FooterLink = styled(LinkListItem)`
@@ -51,33 +36,20 @@ const FooterLink = styled(LinkListItem)`
     cursor: pointer;
     transition: all ease-in .3s;
     border-radius: .6rem;
-    border-right: none;
     border-bottom: 1px solid ${({ theme }) => theme.palette.border.accent};
 
     :hover {
       background-color: ${({ theme }) => theme.palette.primary[3]};
       transform: scale(1.1) translateY(-.2rem);
       transition: all ease-out .3s;
-      padding-left: 1rem;
     }
   }
 
   &.active {
-    /* background-color: ${({ theme }) => theme.palette.active}; */
-    /* border: 1px solid ${({ theme }) => theme.palette.border.complement}; */
     pointer-events: none;
 
     * {
       color: ${({ theme }) => theme.palette.analog.warmest};
-    }
-  }
-
-  @media ${device.sm} {
-    padding: .6rem 1rem .6rem 0;
-    
-    &.ready {
-      border-bottom: none;
-      border-right: 1px solid ${({ theme }) => theme.palette.border.accent};
     }
   }
 `;

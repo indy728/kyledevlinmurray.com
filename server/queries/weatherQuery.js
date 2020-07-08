@@ -18,6 +18,7 @@ const weatherGet = (zipcode) => {
   return axios(options)
     .then((res) => res.data)
     .catch((er) => {
+      console.error(er);
       throw (er);
     });
 };
