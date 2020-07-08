@@ -10,7 +10,7 @@ import AdminLogin from 'components/Admin/AdminLogin';
 
 const Wrapper = styled.footer`
   width: 100%;
-  background-color: ${({ theme }) => theme.palette.primary[0]};
+  background-color: ${({ theme }) => theme.palette.primary[1]};
   padding: ${({ theme }) => theme.padding.containerXS};
   * {
     color: ${({ theme }) => theme.palette.font.primary};
@@ -41,6 +41,7 @@ const FooterTable = styled(Row)`
   @media ${device.sm} {
     flex-direction: row;
     padding: 0;
+    width: 85%;
   }
 
   @media ${device.md} {
@@ -71,11 +72,11 @@ const FooterTable = styled(Row)`
   }
 
   > :not(:first-child) {
-    border-top: 1px solid ${({ theme }) => theme.palette.accent[2]};
+    border-top: 1px solid ${({ theme }) => theme.palette.analog.cool};
 
     @media ${device.sm} {
       border-top: none;
-      border-left: 2px solid ${({ theme }) => theme.palette.accent[2]};
+      border-left: 2px solid ${({ theme }) => theme.palette.analog.cool};
     }
   }
 
@@ -84,24 +85,20 @@ const FooterTable = styled(Row)`
 const Copyright = styled(Row)`
 `;
 
-const footer = (props) => {
-  const { links } = props;
-
-  return (
-    <Wrapper id="footer">
-      <FooterTable className="footer-row">
-        <FooterLinks links={links} />
-        <FooterWeather />
-        <FooterContact />
-      </FooterTable>
-      <FooterSocial />
-      <Copyright className="copyright-row">
-        <p>©2020 @indy728</p>
-        <AdminLogin />
-      </Copyright>
-    </Wrapper>
-  );
-};
+const footer = ({ links }) => (
+  <Wrapper id="footer">
+    <FooterTable className="footer-row">
+      <FooterLinks links={links} />
+      {/* <FooterWeather /> */}
+      <FooterContact />
+    </FooterTable>
+    <FooterSocial />
+    <Copyright className="copyright-row">
+      <p>©2020 @indy728</p>
+      <AdminLogin />
+    </Copyright>
+  </Wrapper>
+);
 
 footer.propTypes = {
   links: PropTypes.arrayOf(PropTypes.shape({

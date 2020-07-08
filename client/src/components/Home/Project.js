@@ -20,10 +20,10 @@ const Wrapper = styled.div`
   }
 
   @media ${device.md} {
-    background-image: url(${bartending});
+    /* background-image: url(${bartending});
     background-color: rgba(100, 4, 4, 0.8);
     background-size: contain;
-    background-position: center;
+    background-position: center; */
   }
 
   @media ${device.sm} {}

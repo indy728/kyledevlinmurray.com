@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { device } from 'themes/media';
 
-
 const GlobalStyle = createGlobalStyle`
   @keyframes moveInBottom {
     0% {
@@ -15,16 +14,18 @@ const GlobalStyle = createGlobalStyle`
   @keyframes growReveal {
     0% {
       opacity: 0;
-      transform: scale(.2);
+      transform: scale(.8);
+    }
+    10% {
+      text-shadow: 0 0 10px ${({ palette }) => palette.white}
     }
     90% {
       opacity: 1;
-      transform: scale(1.1);
-      color: gold;
-      text-shadow: 0 0 20px gold;
+      transform: scale(1);
+      text-shadow: 0 0 20px ${({ palette }) => palette.white};
     }
     100% {
-      transform: scale(1);
+      /* transform: scale(1); */
       color: ${({ palette }) => palette.white};
     }
   }
@@ -50,12 +51,10 @@ const GlobalStyle = createGlobalStyle`
     }
     90% {
       transform: translateX(-25%) skewX(10deg);
-      /* color: gold; */
     }
     100% {
       opacity: 1;
       transform: translate(0) skewX(0);
-      /* color: ${({ palette }) => palette.white}; */
     } 
   }
 
@@ -69,7 +68,6 @@ const GlobalStyle = createGlobalStyle`
     }
     90% {
       transform: translateX(25%) skewX(-10deg);
-      /* color: gold; */
     }
     100% {
       opacity: 1;
@@ -125,7 +123,7 @@ const GlobalStyle = createGlobalStyle`
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     font-family: ${({ fonts }) => fonts.sans};
 
     address, h1, h2, h3, h4, h5, h6 {
@@ -143,6 +141,10 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h2 {
+    }
+
+    @media ${device.md} {
+      font-size: 1.4rem;
     }
   }
 `;

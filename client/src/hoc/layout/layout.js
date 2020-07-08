@@ -10,8 +10,8 @@ class Layout extends Component {
   }
 
   links = [
-    { name: 'Indy', url: 'https://indy728.github.io' },
-    { name: 'SPA Template', url: '/', active: true },
+    { name: 'Indy', url: 'https://indy728.github.io', active: true },
+    { name: 'Black Lives Matter Resources', url: 'https://indy728.github.io/blm' },
   ]
 
   render() {

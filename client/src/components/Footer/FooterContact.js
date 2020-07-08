@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 
   address {
     text-align: center;
-    line-height: 2rem;
+    line-height: 3rem;
 
     @media ${device.sm} {
       align-items: flex-end;

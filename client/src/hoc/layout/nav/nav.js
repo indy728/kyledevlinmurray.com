@@ -16,6 +16,8 @@ const Navbar = styled.nav`
   top: 0;
   z-index: 9999;
 
+  display: none;
+
   @media ${device.md} {
     padding: 0 3rem;
   }

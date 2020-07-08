@@ -1,20 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { oregonCoffee } from 'assets/img/jpg';
 import { device } from 'themes/media';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
-  min-height: 10rem;
   background-color: ${({ theme }) => theme.palette.primary[2]};
-  /* padding-top: 8vh; */
+  position: relative;
 `;
 
 const IntroPic = styled.div`
   width: 100%;
-  height: 50vh;
+  height: 56rem;
   background-image: ${({ theme }) => (
     `linear-gradient(
       180deg,
@@ -24,21 +21,27 @@ const IntroPic = styled.div`
       ${theme.palette.primary[2]} 100%),
     url(${oregonCoffee})`
   )};
-  background-size: 200%;
+  background-size: 100rem;
   background-position: 95% 0;
   background-repeat: no-repeat;
   /* box-shadow: 0 0 10px 2px black; */
 
   @media ${device.md} {
+    background-size: cover;
+    background-position: 100% 50%;
+
+  }
+
+  @media ${device.lg} {
+    height: 72rem;
     background-image: 
-    linear-gradient(
+    /* linear-gradient(
       120deg,
       rgba(2, 50, 50, 0.8),
       rgba(2, 50, 50, 0.8) 45%,
-      transparent 75%),
+      transparent 75%), */
     url(${oregonCoffee});
-    background-size: cover;
-    background-position: top right;
+    
   }
 `;
 
@@ -67,14 +70,30 @@ const IndyAttributes = styled.div`
 `;
 
 const IntroDescription = styled.div`
-  width: 100%;
-  height: 50vh;
+  /* width: 100%; */
+  height: 56rem;
   justify-content: space-between;
-  /* box-shadow: 0 0 10px 2px black; */
   * {
     color: ${({ theme }) => theme.palette.white};
   }
   font-size: 2.4rem;
+
+  @media ${device.lg} {
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    padding: 3rem 10% 3rem 6%;
+    align-items: flex-start;
+    background-color: rgba(2, 50, 50, .8);
+    /* box-shadow: 0 0 10px 2px black; */
+    clip-path: polygon(0% 0%, 100% 0%, 75% 100%, 0% 100%);
+    height: 62rem;
+
+    * {
+      align-items: flex-start;
+    }
+
+  }
 `;
 
 const ResumeLink = styled.div`
@@ -92,9 +111,10 @@ const Nameplate = styled.div`
  font-family: ${({ theme }) => theme.fonts.cursive};
  
  animation: growReveal 1.6s ease-out;
+
 `;
 
-const intro = (props) => {
+const intro = () => {
   const reveal = [
     'developer', 'drink slinger', 'disc golfer', 'DJ',
   ];
@@ -103,7 +123,7 @@ const intro = (props) => {
     <IndyAttribute key={attribute} delay={i}>{attribute}</IndyAttribute>
   ));
 
-  const resumeLink = (<a href="#" className="here">here</a>);
+  const resumeLink = (<a href="/pdf/resume.pdf" target="_blank" className="here">here</a>);
 
   return (
     <Wrapper>
@@ -120,9 +140,6 @@ const intro = (props) => {
       </IntroDescription>
     </Wrapper>
   );
-};
-
-intro.propTypes = {
 };
 
 export default intro;
