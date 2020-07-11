@@ -1,7 +1,5 @@
-export const updateObject = (oldObject, updatedProps) => {
-    return {
-        ...oldObject,
-        ...updatedProps
-    }
-}
-
+// eslint-disable-next-line import/prefer-default-export
+export const updateObject = (oldObject, updatedProps) => ({
+  ...oldObject,
+  ...updatedProps,
+});

@@ -1,6 +1,6 @@
 export {
-  authorize,
+  default as authReducer,
 } from './auth';
 export {
-  fetchListings,
+  default as housingReducer,
 } from './housing';

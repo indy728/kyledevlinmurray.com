@@ -46,6 +46,10 @@ export const homepage = {
   success: 'green',
   black: '#010203',
   white: '#f8f8ff',
+  houseHunt: {
+    background: '#FFF0D6',
+    boxShadow: '#7F786B',
+  },
   overlay,
 };
 

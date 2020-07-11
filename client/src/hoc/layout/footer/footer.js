@@ -95,7 +95,7 @@ const footer = ({ links }) => (
     <FooterSocial />
     <Copyright className="copyright-row">
       <p>©2020 @indy728</p>
-      <AdminLogin />
+      <AdminLogin clicked={() => null}/>
     </Copyright>
   </Wrapper>
 );

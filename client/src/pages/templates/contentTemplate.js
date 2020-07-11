@@ -27,6 +27,8 @@ const contentTemplate = (props) => {
     className, children,
   } = props;
 
+  console.log('[contentTemplate] children: ', children)
+
   return (
     <Wrapper className={className}>
       {children}
@@ -36,7 +38,7 @@ const contentTemplate = (props) => {
 
 contentTemplate.propTypes = {
   className: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default contentTemplate;

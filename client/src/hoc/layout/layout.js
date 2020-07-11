@@ -17,6 +17,8 @@ class Layout extends Component {
   render() {
     const { routeComponents, children } = this.props;
 
+    console.log('[layout] routeComponents[0]: ', routeComponents[0])
+
     return (
       <>
         <Nav links={this.links} login />
@@ -35,7 +37,9 @@ Layout.propTypes = {
   children: PropTypes.element,
   routeComponents: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
-    component: PropTypes.element,
+    component: PropTypes.elementType,
+    path: PropTypes.string,
+    exact: PropTypes.bool,
   })).isRequired,
 };
 Layout.defaultProps = {

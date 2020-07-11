@@ -3,8 +3,7 @@ import {
   Route, Switch, withRouter, Redirect,
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import Home from 'pages/Home/Home';
-import BasicPage from 'pages/BasicPage/BasicPage';
+import { Home, HouseHunt } from 'pages';
 import Layout from 'hoc/layout/layout';
 import theme from 'themes/default';
 import GlobalStyle from 'GlobalStyle';
@@ -19,9 +18,11 @@ class App extends Component {
         name: 'Home', component: Home, path: '/', exact: true,
       },
       {
-        name: 'Basic Page', component: BasicPage, path: '/BasicPage', exact: true,
+        name: 'HouseHunt', component: HouseHunt, path: '/HouseHunt', exact: true,
       },
     ];
+
+    console.log('[App] routeComponents: ', routeComponents)
     const routes = (
       <Switch>
         {routeComponents.map((routeComponent) => {

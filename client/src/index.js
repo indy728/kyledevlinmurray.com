@@ -7,7 +7,7 @@ import {
   createStore, combineReducers, applyMiddleware, compose,
 } from 'redux';
 import thunk from 'redux-thunk';
-import authReducer from 'store/reducers/auth';
+import { authReducer, housingReducer } from './store/reducers';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import client from './apollo';
@@ -15,6 +15,7 @@ import client from './apollo';
 const rootReducer = combineReducers({
   default: null,
   auth: authReducer,
+  housing: housingReducer,
 });
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;

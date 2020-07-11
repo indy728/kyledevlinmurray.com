@@ -26,17 +26,22 @@ class Home extends Component {
     return (
       <Wrapper className="home">
         {/* <StickyNav stickyNavItems={routeComponents} /> */}
+        {/* <img src={oregonCoffee} /> */}
         <Intro />
         <Project />
         <Music />
-        {/* <img src={oregonCoffee} /> */}
       </Wrapper>
     );
   }
 }
 
 Home.propTypes = {
-  routeComponents: PropTypes.arrayOf(PropTypes.element).isRequired,
+  routeComponents: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    component: PropTypes.elementType,
+    path: PropTypes.string,
+    exact: PropTypes.bool,
+  })).isRequired,
 };
 
 const mapStateToProps = (state) => ({
