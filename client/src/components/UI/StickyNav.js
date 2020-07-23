@@ -164,7 +164,13 @@ class StickyNav extends Component {
 }
 
 StickyNav.propTypes = {
-  stickyNavItems: PropTypes.arrayOf(PropTypes.element).isRequired,
+  stickyNavItems: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    component: PropTypes.elementType,
+    path: PropTypes.string,
+    exact: PropTypes.bool,
+
+  })).isRequired,
 };
 
 export default StickyNav;
