@@ -21,11 +21,9 @@ class Home extends Component {
 
   render() {
     const { routeComponents, id } = this.props;
-    console.log('[Home] id: ', id);
 
     return (
       <Wrapper className="home">
-        <StickyNav stickyNavItems={routeComponents} />
         {/* <img src={oregonCoffee} /> */}
         <Intro />
         <Project />

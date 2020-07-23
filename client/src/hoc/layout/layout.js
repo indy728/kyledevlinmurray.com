@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { StickyNav } from 'components/UI';
 import Nav from './nav/nav';
 import Footer from './footer/footer';
 import Content from './content/content';
@@ -17,11 +18,13 @@ class Layout extends Component {
   render() {
     const { routeComponents, children } = this.props;
 
-    console.log('[layout] routeComponents[0]: ', routeComponents[0])
+    console.log('[layout] routeComponents[0]: ', routeComponents[0]);
 
     return (
       <>
         <Nav links={this.links} login />
+        <StickyNav stickyNavItems={routeComponents} />
+
         <Content
           routeComponents={routeComponents}
         >

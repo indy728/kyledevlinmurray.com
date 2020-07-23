@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { device } from 'themes/media';
 
 const Wrapper = styled.div`
+  min-height: 100vh;
 
   @media ${device.sm} {}
 
