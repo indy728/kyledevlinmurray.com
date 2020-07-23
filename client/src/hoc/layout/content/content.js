@@ -27,9 +27,8 @@ class content extends Component {
   }
 
   handleWindowResize = () => {
-    const navbarHeight = document.getElementById('navbar').clientHeight;
     const footerHeight = document.getElementById('footer').clientHeight;
-    this.setState({ contentMinHeight: `${window.innerHeight - navbarHeight - footerHeight}px` });
+    this.setState({ contentMinHeight: `${window.innerHeight - footerHeight}px` });
   }
 
   render() {

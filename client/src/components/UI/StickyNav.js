@@ -133,6 +133,7 @@ class StickyNav extends Component {
       <li key={stickyNavLink.name}>
         <StickyNavLink
           to={stickyNavLink.path}
+          onClick={this.toggleVisibility}
           activeClassName="sticky-nav__active"
           isActive={(match, location) => {
             if (!match) {
