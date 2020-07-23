@@ -1,56 +1,48 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 import { device } from 'themes/media';
+import { Input } from 'components/UI';
 import { updateObject } from 'shared/objectUtility';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { Form } from './components';
 
 const Wrapper = styled.div`
-  position: fixed;
-  z-index: 999999;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(4, 4, 0, .7);
-  justify-content: center;
-
-  @media ${device.sm} {}
-
-  @media ${device.md} {}
-
-  @media ${device.lg} {}
-
-  @media ${device.xl} {}
-`;
-
-const Form = styled.form`
-  width: 40rem;
+  width: 50rem;
+  max-width: 90%;
+  height: 95vh;
+  padding: 2rem .5rem;
   background-color: white;
-  padding: 5rem;
-  height: 40rem;
+  position: relative;
 
-  > :not(:first-child) {
-    margin-top: 3rem;
-  }
 
-  @media ${device.md} {
-    justify-content: center;
-  }
 `;
 
-const ListingInputContainer = styled.div`
-    width: 100%;
-`;
-
-const ListingInput = styled.input`
-    /* flex: 1; */
-    width: 100%;
-    border: ${({ valid }) => (valid ? '1px solid red' : 'none')};
-`;
-
-const FormElement = styled.div`
+const ScrollWrapper = styled.div`
+  overflow: auto;
   width: 100%;
-  align-items: center;
+`;
+
+const CloseButton = styled.div`
+  position: absolute;
+  font-size: 2rem;
+  font-weight: bold;
+  top: 1.5rem;
+  left: 1.5rem;
+  cursor: pointer;
+  transition: .1s all ease-out;
+
+  :hover {
+    transform: scale(1.1);
+  }
+
+  * {
+    color: ${({ theme }) => theme.palette.complement[1]};;
+  }
 `;
 
 class ListingForm extends Component {
@@ -92,11 +84,20 @@ class ListingForm extends Component {
       },
       location: {
         label: 'location',
-        elementType: 'input',
+        elementType: 'select',
         elementConfig: {
-          type: 'text',
-          placeholder: '',
-          autocomplete: '',
+          options: [
+            'Berkeley',
+            'Berkeley: Elmwood',
+            'Berkeley: Ashby',
+            'Berkeley: North Berkeley',
+            'Oakland',
+            'Oakland: West Oakland/Emeryville',
+            'Oakland: Temescal',
+            'Oakland: Downtown',
+            'Oakland: Rockridge/Claremont',
+            'Oakland: Bushrod',
+          ],
         },
         value: '',
         validation: {
@@ -169,7 +170,72 @@ class ListingForm extends Component {
         valid: false,
         touched: false,
       },
-      contactName: {
+      laundry: {
+        label: 'laundry',
+        elementType: 'select',
+        elementConfig: {
+          options: [
+            'in unit',
+            'shared',
+            'no laundry',
+          ],
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      parking: {
+        label: 'parking',
+        elementType: 'select',
+        elementConfig: {
+          options: [
+            'garage - included',
+            'garage - fee',
+            'off street',
+            'street only',
+          ],
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      viewed: {
+        label: 'viewed',
+        elementType: 'select',
+        elementConfig: {
+          options: ['yes', 'no'],
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      dateAvailable: {
+        label: 'date available',
+        elementType: 'date',
+        elementConfig: {
+          type: 'text',
+          placeholder: '',
+          autocomplete: '',
+        },
+        value: new Date(2020, 7, 1),
+        validation: {
+          required: false,
+        },
+        valid: false,
+        touched: false,
+      },
+    },
+    contactControls: {
+      name: {
         label: 'contact name',
         elementType: 'input',
         elementConfig: {
@@ -184,7 +250,7 @@ class ListingForm extends Component {
         valid: false,
         touched: false,
       },
-      contactCompany: {
+      company: {
         label: 'contact company',
         elementType: 'input',
         elementConfig: {
@@ -199,7 +265,7 @@ class ListingForm extends Component {
         valid: false,
         touched: false,
       },
-      contactPhone: {
+      phone: {
         label: 'contact phone',
         elementType: 'input',
         elementConfig: {
@@ -214,7 +280,7 @@ class ListingForm extends Component {
         valid: false,
         touched: false,
       },
-      contactEmail: {
+      email: {
         label: 'contact email',
         elementType: 'input',
         elementConfig: {
@@ -229,7 +295,7 @@ class ListingForm extends Component {
         valid: false,
         touched: false,
       },
-      contactStatus: {
+      status: {
         label: 'contact status',
         elementType: 'input',
         elementConfig: {
@@ -240,52 +306,6 @@ class ListingForm extends Component {
         value: '',
         validation: {
           required: false,
-        },
-        valid: false,
-        touched: false,
-      },
-      laundry: {
-        label: 'laundry',
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-          placeholder: '',
-          autocomplete: '',
-        },
-        value: '',
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touched: false,
-      },
-      parking: {
-        label: 'parking',
-        elementType: 'input',
-        elementConfig: {
-          type: 'text',
-          placeholder: '',
-          autocomplete: '',
-        },
-        value: '',
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touched: false,
-      },
-      viewed: {
-        label: 'viewed',
-        elementType: 'select',
-        elementConfig: {
-          type: 'select',
-          options: ['yes', 'no'],
-          placeholder: '',
-          autocomplete: '',
-        },
-        value: '',
-        validation: {
-          required: true,
         },
         valid: false,
         touched: false,
@@ -320,8 +340,6 @@ class ListingForm extends Component {
   inputChangedHandler = (event, key, valueType = 'value') => {
     const { listingControls } = this.state;
 
-    console.log('[ListingForm] key: ', key);
-
     const controls = listingControls[key];
     const updatedControls = updateObject(controls, {
       [valueType]: event.target.value,
@@ -338,75 +356,53 @@ class ListingForm extends Component {
     this.setState({ listingControls, formIsValid });
   }
 
+  submitListingHandler = (event) => {
+    event.preventDefault();
+
+    const { listingControls, contactControls } = this.state;
+    const id = shortid.generate();
+    const listing = {
+      id,
+      details: {},
+      contact: {},
+    };
+    const listingKeys = Object.keys(listingControls);
+    const contactKeys = Object.keys(contactControls);
+
+    listingKeys.forEach((key) => { listing.details[key] = listingControls[key].value; });
+    contactKeys.forEach((key) => { listing.contact[key] = contactControls[key].value; });
+
+    console.log(listing);
+  }
+
   render() {
-    const { listingControls } = this.state;
-    const formElementsArray = [];
-
-    for (const key in listingControls) {
-      formElementsArray.push({
-        id: key,
-        config: listingControls[key],
-      });
-    }
-
-    const form = formElementsArray.map(({ id, config }) => {
-      const {
-        elementType,
-        elementConfig,
-        value,
-        valid,
-        validation,
-        touched,
-        label,
-      } = config;
-
-      return (
-        <FormElement key={id}>
-          <ListingInputContainer>
-            <div>
-              {label}
-            </div>
-            <ListingInput
-                // autocomplete={formElement.config.elementConfig.autocomplete || ''}
-                // className="ListingInput"
-              elementType={elementType}
-              elementConfig={elementConfig}
-              value={value}
-              invalid={!valid}
-              shouldValidate={validation}
-              touched={touched}
-              onChange={(event) => this.inputChangedHandler(event, id)}
-            />
-            {/* {attribute} */}
-          </ListingInputContainer>
-        </FormElement>
-      );
-    });
-
+    const { listingControls, contactControls, formIsValid } = this.state;
+    const { close } = this.props;
 
     return (
       <Wrapper>
-        <Form
-          onSubmit={this.submitListingHandler}
+        <CloseButton
+          onClick={close}
         >
-          {form}
-          {/* {transformedAttributes} */}
-          <button>
-            add element
-          </button>
-          <div>
-            <button>
-              SUBMIT NEW COCKTAIL
-            </button>
-          </div>
-        </Form>
+          <FontAwesomeIcon icon={faTimesCircle} />
+        </CloseButton>
+        <ScrollWrapper>
+          <Form
+            listingControls={listingControls}
+            contactControls={contactControls}
+            close={close}
+            submitListing={this.submitListingHandler}
+            formIsValid={formIsValid}
+            inputChanged={this.inputChangedHandler}
+          />
+        </ScrollWrapper>
       </Wrapper>
     );
   }
 }
 
 ListingForm.propTypes = {
-  submitListing: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
 };
 
 export default ListingForm;

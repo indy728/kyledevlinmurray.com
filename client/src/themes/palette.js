@@ -21,7 +21,7 @@ const homeBase = {
 };
 
 const overlay = {
-  primary: 'rgba(1,43,88,0.8)',
+  primary: 'rgba(1,43,88,0.9)',
   black: 'rgba(1,2,3,0.7)',
   white: 'rgba(248,248,255,0.8)',
 };
@@ -37,6 +37,7 @@ export const homepage = {
     warmest: '#D6B72D',
   },
   accent: ['#014544', '#016B69', '#018582', '#01918F', '#02D1CE'],
+  cool: ['rgb(1, 43, 88)', 'rgb(1, 64, 132)', 'rgb(2, 86, 176)'],
   active: '#02356B',
   font: homeBase,
   border: homeBase,

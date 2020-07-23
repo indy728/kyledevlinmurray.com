@@ -4,130 +4,121 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { device } from 'themes/media';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapSigns, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTimes, faBars,
+} from '@fortawesome/free-solid-svg-icons';
 
 const NavWrapper = styled.div`
-  width: 100%;
   display: ${({ visible }) => (visible ? 'flex' : 'none')};
   background-color: ${({ theme }) => theme.palette.overlay.primary};
-  position: absolute;
-  padding: 2rem 8rem;
-  top: ${({ theme }) => theme.height.navbar.xs};
+  position: fixed;
+  padding: 4rem 2rem;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 999;
   animation: slideInDown .3s linear;
+  justify-content: center;
 
-  &.fixed {
-    position: fixed;
-    top: 0;
+  @media ${device.maxLg} {
+    bottom: 0;
+  }
+
+  @media ${device.lg} {
+    padding: 1rem 3rem;
+    height: 12rem;
+
+    animation: slideInDown .15s linear;
+    align-items: flex-start;
   }
 `;
 
 const ButtonWrapper = styled.div`
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.palette.white};
-  color: ${({ theme }) => theme.palette.black};
   justify-content: center;
   z-index: 9998;
-  box-shadow: 0 0 9px  ${({ theme }) => theme.palette.primary[2]};;
-  position: absolute;
-
-  top: ${({ theme }) => `${parseInt(theme.height.navbar.xs, 0) + 2.5}rem`};
+  box-shadow: 0 0 4px 2px ${({ theme }) => theme.palette.primary[2]};;
+  position: fixed;
+  top: 2.5rem;
   right: 2.5rem;
-  transition: all .2s ease-out;
+  transition: all .1s ease-out;
 
-  &.fixed {
-    position: fixed;
-    top: 2.5rem;
+  > svg {
+    transform: scale(1.3);
+
+    * {
+      color: ${({ theme }) => theme.palette.primary[1]};
+    }
   }
 
   :hover {
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
 
   :active {
-    transform: scale(1.2) translateY(.2rem);
+    transform: scale(1.1) translateY(.2rem);
   }
 
-  > svg {
-
-    @media ${device.maxMd} {
-      &.fa-map-signs {
-        transform: translate(1px, 1px) scale(1.4);
-      }
-    }
-
-    transform: scale(1.3);
+  @media ${device.lg} {
+    top: 4rem;
+    right: 4rem;
   }
-
 `;
 
 const StickyNavLink = styled(NavLink)`
-  width: 100%;
-  height: 5rem;
+  padding: 1.5rem 2.5rem;
   margin: .2rem;
   justify-content: center;
   flex-flow: row;
   border-radius: 4px;
-  font-size: 110%;
+  font-size: 2.4rem;
   font-weight: 500;
   text-transform: uppercase;
   text-decoration: none;
-  
   transition: all .2s ease-out;
-  span {
-    color: ${({ theme }) => theme.palette.font.primary};
-  }
+  color: ${({ theme }) => theme.palette.font.primary};
+  border-bottom: 2px solid ${({ theme }) => theme.palette.border.accent};
 
   :hover {
+    background-color: ${({ theme }) => theme.palette.cool[1]};
     transform: scale(1.1) translateY(-.5rem);
-    border-bottom: 2px solid ${({ theme }) => theme.palette.border.accent};
   }
 
   &.sticky-nav__active {
     transform: none;
     pointer-events: none;
+    border-bottom: none;
 
-    span {
-      color: ${({ theme }) => theme.palette.font.complement};
-    }
+    color: ${({ theme }) => theme.palette.font.complement};
+  }
+
+  @media ${device.lg} {
+    font-size: 2rem;
   }
 `;
 
 const StickyNavList = styled.ul`
-  @media ${device.sm} {
+  > :not(:first-child) {
+      margin-top: 3rem;
+    }
+
+  @media ${device.lg} {
     flex-flow: row;
 
     > :not(:first-child) {
       margin-left: 4rem;
+      margin-top: 0;
     }
   }
-`;
-
-const LinkChar = styled.span`
-  animation: moveInTop 1s ease-out;
-  animation-delay: ${({ delay }) => `${delay}ms`};
 `;
 
 class StickyNav extends Component {
   state = {
     visible: false,
-    fixed: false,
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = () => {
-    const navbar = document.getElementById('navbar');
-    const navbarHeight = navbar && navbar.offsetHeight;
-    this.setState({ fixed: window.pageYOffset >= navbarHeight });
   }
 
   toggleVisibility = () => {
@@ -136,9 +127,8 @@ class StickyNav extends Component {
 
   render() {
     const { stickyNavItems } = this.props;
-    const { fixed, visible } = this.state;
-    const positionClass = fixed ? 'fixed' : 'float';
-    const buttonIcon = visible ? faTimes : faMapSigns;
+    const { visible } = this.state;
+    const buttonIcon = visible ? faTimes : faBars;
     const stickyNavButtons = stickyNavItems.map((stickyNavLink) => (
       <li key={stickyNavLink.name}>
         <StickyNavLink
@@ -152,27 +142,19 @@ class StickyNav extends Component {
             return pathname === stickyNavLink.path;
           }}
         >
-          {stickyNavLink.name.split('').map((char, i) => (
-            <LinkChar
-              // eslint-disable-next-line react/no-array-index-key
-              key={i}
-              delay={i * 100}
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </LinkChar>
-          ))}
+          {stickyNavLink.name}
         </StickyNavLink>
       </li>
     ));
 
     return (
       <>
-        <NavWrapper className={positionClass} visible={visible}>
+        <NavWrapper visible={visible}>
           <StickyNavList>
             {stickyNavButtons}
           </StickyNavList>
         </NavWrapper>
-        <ButtonWrapper className={positionClass} onClick={this.toggleVisibility}>
+        <ButtonWrapper onClick={this.toggleVisibility}>
           <FontAwesomeIcon icon={buttonIcon} />
         </ButtonWrapper>
       </>

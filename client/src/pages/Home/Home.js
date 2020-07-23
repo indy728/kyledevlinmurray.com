@@ -25,7 +25,7 @@ class Home extends Component {
 
     return (
       <Wrapper className="home">
-        {/* <StickyNav stickyNavItems={routeComponents} /> */}
+        <StickyNav stickyNavItems={routeComponents} />
         {/* <img src={oregonCoffee} /> */}
         <Intro />
         <Project />

@@ -77,7 +77,7 @@ const GlobalStyle = createGlobalStyle`
   @keyframes slideInDown {
     0% {
       opacity: 0;
-      transform: translateY(-50%); }
+      transform: translateY(-100%); }
     100% {
       opacity: 1;
       transform: translate(0); } 

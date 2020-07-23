@@ -3,7 +3,7 @@ import {
   Route, Switch, withRouter, Redirect,
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { Home, HouseHunt } from 'pages';
+import { Home, HouseHunt, AppADay } from 'pages';
 import Layout from 'hoc/layout/layout';
 import theme from 'themes/default';
 import GlobalStyle from 'GlobalStyle';
@@ -18,11 +18,10 @@ class App extends Component {
         name: 'Home', component: Home, path: '/', exact: true,
       },
       {
-        name: 'HouseHunt', component: HouseHunt, path: '/HouseHunt', exact: true,
+        name: 'App-A-Day', component: AppADay, path: '/app-a-day', exact: true,
       },
     ];
 
-    console.log('[App] routeComponents: ', routeComponents)
     const routes = (
       <Switch>
         {routeComponents.map((routeComponent) => {

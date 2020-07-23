@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { device } from 'themes/media';
+import { Modal } from 'components/UI';
 import { HouseList, ListingForm } from 'components/HouseHunt';
 import { fetchListings } from 'store/actions';
 import shortid from 'shortid';
@@ -71,6 +72,7 @@ class HouseHunt extends Component {
   state = {
     sortBy: 'rent',
     sortUp: true,
+    showModal: true,
   }
 
   componentDidMount() {
@@ -87,13 +89,27 @@ class HouseHunt extends Component {
     this.setState({ sortUp: event.target.value === 'true' });
   }
 
+  toggleModalHandler = () => {
+    this.setState(((prevState) => ({ showModal: !prevState.showModal })));
+  }
+
   render() {
-    const { sortBy, sortUp } = this.state;
+    const { sortBy, sortUp, showModal } = this.state;
     const { error, test, loading } = this.props;
     console.log('[HouseHunt] shortid.generate(): ', shortid.generate());
     const options = sortOptions.map((option) => (
       <option key={option}>{option}</option>
     ));
+    let modal = null;
+    if (showModal) {
+      modal = (
+        <Modal>
+          <ListingForm
+            close={this.toggleModalHandler}
+          />
+        </Modal>
+      );
+    }
 
     return (
       <>
@@ -114,7 +130,7 @@ class HouseHunt extends Component {
               </select>
             </SortingOptions>
             <AddListing
-              onClick={null}
+              onClick={this.toggleModalHandler}
             >
               + add listing
             </AddListing>
@@ -124,7 +140,7 @@ class HouseHunt extends Component {
             sortUp={sortUp}
           />
         </Wrapper>
-        <ListingForm />
+        {modal}
       </>
     );
   }
